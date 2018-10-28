@@ -39,9 +39,22 @@ function shuffle(array) {
 
 
 let allCards = document.querySelectorAll('.card');
+let openCards = [];
 
-for(let card of allCards) {
+for (let card of allCards) {
 	card.addEventListener('click', function(evt) {
+		openCards.push(card);
 		card.classList.add('open', 'show');
+		console.log(openCards);
+		
+		// Show only two cards max
+		if(openCards.length == 2) {
+			setTimeout(function() {
+				openCards.forEach(function(card) {
+					card.classList.remove('open', 'show');
+				});
+				openCards  = [];
+			}, 1000);
+		}
 	});
 }
