@@ -1,8 +1,20 @@
 /*
  * Create a list that holds all of your cards
  */
+let cards = ['fa-diamond', 'fa-diamond',
+			'fa-paper-plane-o', 'fa-paper-plane-o',
+			'fa-anchor', 'fa-anchor',
+			'fa-bolt', 'fa-bolt',
+			'fa-cube', 'fa-cube',
+			'fa-leaf', 'fa-leaf',
+			'fa-bicycle', 'fa-bicycle',
+			'fa-bomb', 'fa-bomb']
 
-
+function generateCard(card) {
+	return `<li class="card">
+				<i class="fa ${card}"></i>
+			</li>`;
+}
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -37,6 +49,16 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+function initGame() {
+	let deck = document.querySelector('.deck');
+	let cardHTML = cards.map(function(card) {
+		return generateCard(card);
+	});
+
+	deck.innerHTML = cardHTML.join('');
+}
+
+initGame();
 
 let allCards = document.querySelectorAll('.card');
 let openCards = [];
