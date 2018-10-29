@@ -50,12 +50,19 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+let moves = 0;
+let moveCounter = document.querySelector('.moves');
+
 // Initialize game
 function initGame() {
 	let deck = document.querySelector('.deck');
+
 	let cardHTML = shuffle(cards).map(function(card) { // Shuffle cards
 		return generateCard(card);
 	});
+
+	moves = 0;
+	moveCounter.innerText = moves;
 
 	deck.innerHTML = cardHTML.join('');
 }
@@ -91,6 +98,9 @@ for (let card of allCards) {
 					openCards[1].classList.add('open');
 					openCards[1].classList.add('show');
 				}
+
+				moves += 1;
+				moveCounter.innerText = moves;
 			}
 		}
 	});
