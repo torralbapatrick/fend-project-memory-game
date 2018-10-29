@@ -68,7 +68,7 @@ let openCards = [];
 for (let card of allCards) {
 	card.addEventListener('click', function(evt) {
 		// Check if the open card is clicked twice
-		if (!card.classList.contains('open') && !card.classList.contains('show')) {
+		if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
 			openCards.push(card);
 			card.classList.add('open', 'show');
 
