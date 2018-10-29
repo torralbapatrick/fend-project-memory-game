@@ -10,6 +10,7 @@ let cards = ['fa-diamond', 'fa-diamond',
 			'fa-bicycle', 'fa-bicycle',
 			'fa-bomb', 'fa-bomb']
 
+// Generate html list of cards
 function generateCard(card) {
 	return `<li class="card">
 				<i class="fa ${card}"></i>
@@ -49,9 +50,10 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+// Initialize game
 function initGame() {
 	let deck = document.querySelector('.deck');
-	let cardHTML = cards.map(function(card) {
+	let cardHTML = shuffle(cards).map(function(card) { // Shuffle cards
 		return generateCard(card);
 	});
 
