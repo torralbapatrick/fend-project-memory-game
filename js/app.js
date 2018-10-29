@@ -52,6 +52,7 @@ function shuffle(array) {
 
 let moves = 0;
 const moveCounter = document.querySelector('.moves');
+const starRating = document.querySelector('.stars');
 
 // Initialize game
 function initGame() {
@@ -102,6 +103,13 @@ for (const card of allCards) {
 				// Count moves
 				moves += 1;
 				moveCounter.innerText = moves;
+
+				// Star rating
+				if (moves == 13) {
+					starRating.removeChild(starRating.children[0]);
+				}else if (moves == 25) {
+					starRating.removeChild(starRating.children[0]);
+				}
 			}
 		}
 	});
