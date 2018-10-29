@@ -66,13 +66,18 @@ function initGame() {
 		return generateCard(card);
 	});
 
+	deck.innerHTML = cardHTML.join('');
+
 	moves = 0;
 	moveCounter.innerText = moves;
 
 	seconds = 0; minutes = 0; hours = 0;
 	timer.innerText = "00:00:00";
 
-	deck.innerHTML = cardHTML.join('');
+	starRating.children[0].style.display = "inline";
+	starRating.children[1].style.display = "inline";
+	
+	stopClock();
 }
 
 initGame();
@@ -87,7 +92,7 @@ for (const card of allCards) {
 			startClock();
 			clockOff = false;
 		}
-		
+
 		// Check if the open card is clicked twice
 		if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
 			openCards.push(card);
@@ -119,14 +124,20 @@ for (const card of allCards) {
 
 				// Star rating
 				if (moves == 13) {
-					starRating.removeChild(starRating.children[0]);
+					starRating.children[0].style.display = "none";
 				}else if (moves == 25) {
-					starRating.removeChild(starRating.children[0]);
+					starRating.children[1].style.display = "none";
 				}
 			}
 		}
 	});
 }
+
+// Restart game
+const restartButton = document.querySelector('.restart');
+restartButton.addEventListener('click', function() {
+	initGame();
+});
 
 // Timer
 function startClock() {
