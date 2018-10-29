@@ -12,7 +12,7 @@ let cards = ['fa-diamond', 'fa-diamond',
 
 // Generate html list of cards
 function generateCard(card) {
-	return `<li class="card">
+	return `<li class="card" data-card=${card}>
 				<i class="fa ${card}"></i>
 			</li>`;
 }
@@ -68,19 +68,29 @@ let openCards = [];
 for (let card of allCards) {
 	card.addEventListener('click', function(evt) {
 		// Check if the open card is clicked twice
-		if (!card.classList.contains('open') || !card.classList.contains('show')) {
+		if (!card.classList.contains('open') && !card.classList.contains('show')) {
 			openCards.push(card);
 			card.classList.add('open', 'show');
-			console.log(openCards);
 
 			// Show only two cards max
-			if(openCards.length == 2) {
+			if (openCards.length == 2) {
 				setTimeout(function() {
-					openCards.forEach(function(card) {
-						card.classList.remove('open', 'show');
-					});
+					for (let openCard of openCards) {
+						openCard.classList.remove('open', 'show');
+					}
 					openCards  = [];
 				}, 1000);
+
+				// Check if cards are match
+				if (openCards[0].dataset.card == openCards[1].dataset.card) {
+					openCards[0].classList.add('match');
+					openCards[0].classList.add('open');
+					openCards[0].classList.add('show');
+
+					openCards[1].classList.add('match');
+					openCards[1].classList.add('open');
+					openCards[1].classList.add('show');
+				}
 			}
 		}
 	});
