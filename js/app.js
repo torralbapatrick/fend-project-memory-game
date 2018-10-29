@@ -8,7 +8,7 @@ const cards = ['fa-diamond', 'fa-diamond',
 			'fa-cube', 'fa-cube',
 			'fa-leaf', 'fa-leaf',
 			'fa-bicycle', 'fa-bicycle',
-			'fa-bomb', 'fa-bomb']
+			'fa-bomb', 'fa-bomb'];
 
 // Generate html list of cards
 function generateCard(card) {
@@ -50,9 +50,13 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-let moves = 0;
 const moveCounter = document.querySelector('.moves');
 const starRating = document.querySelector('.stars');
+const timer = document.querySelector('.timer');
+
+let moves = 0;
+let seconds = 0, minutes = 0, hours = 0, time;
+let clockOff = true;
 
 // Initialize game
 function initGame() {
@@ -65,6 +69,9 @@ function initGame() {
 	moves = 0;
 	moveCounter.innerText = moves;
 
+	seconds = 0; minutes = 0; hours = 0;
+	timer.innerText = "00:00:00";
+
 	deck.innerHTML = cardHTML.join('');
 }
 
@@ -75,6 +82,12 @@ let openCards = [];
 
 for (const card of allCards) {
 	card.addEventListener('click', function(evt) {
+		// Start clock when a card is clicked
+		if (clockOff) {
+			startClock();
+			clockOff = false;
+		}
+		
 		// Check if the open card is clicked twice
 		if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
 			openCards.push(card);
@@ -113,4 +126,27 @@ for (const card of allCards) {
 			}
 		}
 	});
+}
+
+// Timer
+function startClock() {
+	time = setInterval(function() {
+		seconds += 1;
+		if (seconds >= 60) {
+			seconds = 0;
+			minutes += 1;
+			if (minutes >= 60) {
+				minutes = 0;
+				hours += 1;
+			}
+		}
+
+		timer.innerText = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" +
+		(minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
+		(seconds > 9 ? seconds : "0" + seconds);
+	}, 1000);
+}
+
+function stopClock() {
+	clearInterval(time);
 }
