@@ -56,7 +56,7 @@ const timer = document.querySelector('.timer');
 
 let moves = 0;
 let seconds = 0, minutes = 0, hours = 0, time;
-let clockOff = true;
+let clockOff;
 
 // Initialize game
 function initGame() {
@@ -71,66 +71,71 @@ function initGame() {
 	moves = 0;
 	moveCounter.innerText = moves;
 
+	clockOff = true;
 	seconds = 0; minutes = 0; hours = 0;
 	timer.innerText = "00:00:00";
 
 	starRating.children[0].style.display = "inline";
 	starRating.children[1].style.display = "inline";
-	
-	stopClock();
+
+	resetClock();
+	activateCards();
 }
 
 initGame();
 
-const allCards = document.querySelectorAll('.card');
-let openCards = [];
+// Add listener to the cards
+function activateCards() {
+	const allCards = document.querySelectorAll('.card');
+	let openCards = [];
 
-for (const card of allCards) {
-	card.addEventListener('click', function(evt) {
-		// Start clock when a card is clicked
-		if (clockOff) {
-			startClock();
-			clockOff = false;
-		}
+	for (const card of allCards) {
+		card.addEventListener('click', function(evt) {
+			// Start clock when a card is clicked
+			if (clockOff) {
+				startClock();
+				clockOff = false;
+			}
 
-		// Check if the open card is clicked twice
-		if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
-			openCards.push(card);
-			card.classList.add('open', 'show');
+			// Check if the open card is clicked twice
+			if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
+				openCards.push(card);
+				card.classList.add('open', 'show');
 
-			// Show only two cards max
-			if (openCards.length == 2) {
-				setTimeout(function() {
-					for (const openCard of openCards) {
-						openCard.classList.remove('open', 'show');
+				// Show only two cards max
+				if (openCards.length == 2) {
+					setTimeout(function() {
+						for (const openCard of openCards) {
+							openCard.classList.remove('open', 'show');
+						}
+						openCards  = [];
+					}, 1000);
+
+					// Check if cards are match
+					if (openCards[0].dataset.card == openCards[1].dataset.card) {
+						openCards[0].classList.add('match');
+						openCards[0].classList.add('open');
+						openCards[0].classList.add('show');
+
+						openCards[1].classList.add('match');
+						openCards[1].classList.add('open');
+						openCards[1].classList.add('show');
 					}
-					openCards  = [];
-				}, 1000);
 
-				// Check if cards are match
-				if (openCards[0].dataset.card == openCards[1].dataset.card) {
-					openCards[0].classList.add('match');
-					openCards[0].classList.add('open');
-					openCards[0].classList.add('show');
+					// Count moves
+					moves += 1;
+					moveCounter.innerText = moves;
 
-					openCards[1].classList.add('match');
-					openCards[1].classList.add('open');
-					openCards[1].classList.add('show');
-				}
-
-				// Count moves
-				moves += 1;
-				moveCounter.innerText = moves;
-
-				// Star rating
-				if (moves == 13) {
-					starRating.children[0].style.display = "none";
-				}else if (moves == 25) {
-					starRating.children[1].style.display = "none";
+					// Star rating
+					if (moves == 13) {
+						starRating.children[0].style.display = "none";
+					}else if (moves == 25) {
+						starRating.children[1].style.display = "none";
+					}
 				}
 			}
-		}
-	});
+		});
+	}
 }
 
 // Restart game
@@ -158,6 +163,6 @@ function startClock() {
 	}, 1000);
 }
 
-function stopClock() {
+function resetClock() {
 	clearInterval(time);
 }
