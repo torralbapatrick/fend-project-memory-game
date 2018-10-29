@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-let cards = ['fa-diamond', 'fa-diamond',
+const cards = ['fa-diamond', 'fa-diamond',
 			'fa-paper-plane-o', 'fa-paper-plane-o',
 			'fa-anchor', 'fa-anchor',
 			'fa-bolt', 'fa-bolt',
@@ -51,13 +51,13 @@ function shuffle(array) {
  */
 
 let moves = 0;
-let moveCounter = document.querySelector('.moves');
+const moveCounter = document.querySelector('.moves');
 
 // Initialize game
 function initGame() {
-	let deck = document.querySelector('.deck');
+	const deck = document.querySelector('.deck');
 
-	let cardHTML = shuffle(cards).map(function(card) { // Shuffle cards
+	const cardHTML = shuffle(cards).map(function(card) { // Shuffle cards
 		return generateCard(card);
 	});
 
@@ -69,10 +69,10 @@ function initGame() {
 
 initGame();
 
-let allCards = document.querySelectorAll('.card');
+const allCards = document.querySelectorAll('.card');
 let openCards = [];
 
-for (let card of allCards) {
+for (const card of allCards) {
 	card.addEventListener('click', function(evt) {
 		// Check if the open card is clicked twice
 		if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
@@ -82,7 +82,7 @@ for (let card of allCards) {
 			// Show only two cards max
 			if (openCards.length == 2) {
 				setTimeout(function() {
-					for (let openCard of openCards) {
+					for (const openCard of openCards) {
 						openCard.classList.remove('open', 'show');
 					}
 					openCards  = [];
@@ -99,6 +99,7 @@ for (let card of allCards) {
 					openCards[1].classList.add('show');
 				}
 
+				// Count moves
 				moves += 1;
 				moveCounter.innerText = moves;
 			}
