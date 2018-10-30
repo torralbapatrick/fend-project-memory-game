@@ -107,3 +107,43 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/* Modal */
+.modal {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-container {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    height: 400px;
+    width: 500px;
+    background: #fff;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+}
+
+.modal-content { 
+    position: relative;
+    top: 50%;
+    text-align: center;
+    transform: translate(0, -50%);
+}
+
+.modal button {
+    color: #fff;
+    cursor: pointer;
+    background: #02ccba;
+    border: 0;
+    border-radius: 5px;
+    margin-top: 25px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+}

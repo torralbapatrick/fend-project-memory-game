@@ -54,6 +54,9 @@ const moveCounter = document.querySelector('.moves');
 const starRating = document.querySelector('.stars');
 const timer = document.querySelector('.timer');
 const restartButton = document.querySelector('.restart');
+const stats = document.querySelector('.stats');
+const modal = document.querySelector('.modal');
+const playAgain = document.querySelector('.play-again');
 
 let moves = 0, match = 0;
 let rating = 3;
@@ -62,6 +65,8 @@ let clockOff;
 
 // Initialize game
 function initGame() {
+	modal.style.display = "none";
+
 	const deck = document.querySelector('.deck');
 
 	const cardHTML = shuffle(cards).map(function(card) { // Shuffle cards
@@ -142,16 +147,20 @@ function activateCards() {
 						// Check if the game is won
 						if (match == 8) {
 							stopClock();
-							console.log("Congratulations!");
-							console.log("Time: " + time);
-							console.log("Moves: " + moves);
+							let stat;
+
+							stat = `In ${time} with ${moves} moves`;
+
 							if(rating == 3) {
-								console.log("Rating: 3 Stars (Excellent)");
+								stat = `${stat} and ${rating} stars!`;
 							} else if (rating == 2) {
-								console.log("Rating: 2 Stars (Average)");
+								stat = `${stat} and ${rating} stars!`;
 							} else {
-								console.log("Rating: 1 Star (Poor)");
+								stat = `${stat} and ${rating} star!`;
 							}
+
+							stats.innerText = stat;
+							modal.style.display = "block";
 						}
 					}
 				}
@@ -186,5 +195,9 @@ function stopClock() {
 
 // Restart game
 restartButton.addEventListener('click', function() {
+	initGame();
+});
+
+playAgain.addEventListener('click', function() {
 	initGame();
 });
