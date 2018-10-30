@@ -53,9 +53,11 @@ function shuffle(array) {
 const moveCounter = document.querySelector('.moves');
 const starRating = document.querySelector('.stars');
 const timer = document.querySelector('.timer');
+const restartButton = document.querySelector('.restart');
 
-let moves = 0;
-let seconds = 0, minutes = 0, hours = 0, time;
+let moves = 0, match = 0;
+let rating = 3;
+let seconds = 0, minutes = 0, hours = 0, clock, time;
 let clockOff;
 
 // Initialize game
@@ -68,8 +70,9 @@ function initGame() {
 
 	deck.innerHTML = cardHTML.join('');
 
-	moves = 0;
+	moves = 0; match = 0;
 	moveCounter.innerText = moves;
+	rating = 3;
 
 	clockOff = true;
 	seconds = 0; minutes = 0; hours = 0;
@@ -78,7 +81,7 @@ function initGame() {
 	starRating.children[0].style.display = "inline";
 	starRating.children[1].style.display = "inline";
 
-	resetClock();
+	stopClock();
 	activateCards();
 }
 
@@ -111,6 +114,19 @@ function activateCards() {
 						openCards  = [];
 					}, 1000);
 
+					// Count moves
+					moves += 1;
+					moveCounter.innerText = moves;
+
+					// Star rating
+					if (moves == 13) {
+						starRating.children[0].style.display = "none";
+						rating -= 1;
+					}else if (moves == 25) {
+						starRating.children[1].style.display = "none";
+						rating -= 1;
+					}
+
 					// Check if cards are match
 					if (openCards[0].dataset.card == openCards[1].dataset.card) {
 						openCards[0].classList.add('match');
@@ -120,17 +136,23 @@ function activateCards() {
 						openCards[1].classList.add('match');
 						openCards[1].classList.add('open');
 						openCards[1].classList.add('show');
-					}
 
-					// Count moves
-					moves += 1;
-					moveCounter.innerText = moves;
+						match += 1;
 
-					// Star rating
-					if (moves == 13) {
-						starRating.children[0].style.display = "none";
-					}else if (moves == 25) {
-						starRating.children[1].style.display = "none";
+						// Check if the game is won
+						if (match == 8) {
+							stopClock();
+							console.log("Congratulations!");
+							console.log("Time: " + time);
+							console.log("Moves: " + moves);
+							if(rating == 3) {
+								console.log("Rating: 3 Stars (Excellent)");
+							} else if (rating == 2) {
+								console.log("Rating: 2 Stars (Average)");
+							} else {
+								console.log("Rating: 1 Star (Poor)");
+							}
+						}
 					}
 				}
 			}
@@ -138,15 +160,9 @@ function activateCards() {
 	}
 }
 
-// Restart game
-const restartButton = document.querySelector('.restart');
-restartButton.addEventListener('click', function() {
-	initGame();
-});
-
 // Timer
 function startClock() {
-	time = setInterval(function() {
+	clock = setInterval(function() {
 		seconds += 1;
 		if (seconds >= 60) {
 			seconds = 0;
@@ -157,12 +173,18 @@ function startClock() {
 			}
 		}
 
-		timer.innerText = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" +
+		time = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" +
 		(minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
 		(seconds > 9 ? seconds : "0" + seconds);
+		timer.innerText = time;
 	}, 1000);
 }
 
-function resetClock() {
-	clearInterval(time);
+function stopClock() {
+	clearInterval(clock);
 }
+
+// Restart game
+restartButton.addEventListener('click', function() {
+	initGame();
+});
