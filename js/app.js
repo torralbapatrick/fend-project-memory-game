@@ -147,7 +147,7 @@ function checkForMatch(card1, card2) {
 // Move counter and star rating
 function displayMovesAndRating() {
 	moves = 0; rating = 3;
-	moveElement.innerText = moves;
+	moveElement.innerText = `${moves} Moves`;
 
 	ratingElement.children[2].classList.remove('fa-star-o');
 	ratingElement.children[2].classList.add('fa-star');
@@ -158,7 +158,7 @@ function displayMovesAndRating() {
 
 function countMoves() {
 	moves += 1;
-	moveElement.innerText = moves;
+	moveElement.innerText = `${moves} Moves`;
 
 	// Star rating
 	if (moves == 13) {
