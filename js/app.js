@@ -75,6 +75,8 @@ function initGame() {
 
 	deck.innerHTML = cardHTML.join('');
 
+	revealCards();
+
 	moves = 0; match = 0;
 	moveCounter.innerText = moves;
 	rating = 3;
@@ -94,6 +96,19 @@ function initGame() {
 }
 
 initGame();
+
+// Reveal all cards for 1 second
+function revealCards() {
+	const allCards = document.querySelectorAll('.card');
+	for (const card of allCards) {
+		card.classList.add('open', 'show');
+	}
+	setTimeout(function() {
+		for (const card of allCards) {
+			card.classList.remove('open', 'show');
+		}
+	}, 1000);
+}
 
 // Add listener to the cards
 function activateCards() {
