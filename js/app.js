@@ -83,8 +83,11 @@ function initGame() {
 	seconds = 0; minutes = 0; hours = 0;
 	timer.innerText = "00:00:00";
 
-	starRating.children[0].style.display = "inline";
-	starRating.children[1].style.display = "inline";
+	starRating.children[2].classList.remove('fa-star-o');
+	starRating.children[2].classList.add('fa-star');
+
+	starRating.children[1].classList.remove('fa-star-o');
+	starRating.children[1].classList.add('fa-star');
 
 	stopClock();
 	activateCards();
@@ -125,10 +128,12 @@ function activateCards() {
 
 					// Star rating
 					if (moves == 13) {
-						starRating.children[0].style.display = "none";
+						starRating.children[2].classList.remove('fa-star');
+						starRating.children[2].classList.add('fa-star-o');
 						rating -= 1;
 					}else if (moves == 25) {
-						starRating.children[1].style.display = "none";
+						starRating.children[1].classList.remove('fa-star');
+						starRating.children[1].classList.add('fa-star-o');
 						rating -= 1;
 					}
 
