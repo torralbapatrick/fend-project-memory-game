@@ -61,7 +61,7 @@ const playAgain = document.querySelector('.play-again');
 let moves = 0, match = 0;
 let rating = 3;
 let seconds = 0, minutes = 0, hours = 0, clock, time;
-let clockOff;
+let canFlip, clockOff;
 
 // Initialize game
 function initGame() {
@@ -90,6 +90,8 @@ function initGame() {
 
 	starRating.children[1].classList.remove('fa-star-o');
 	starRating.children[1].classList.add('fa-star');
+
+	canFlip = true;
 
 	stopClock();
 	activateCards();
@@ -125,65 +127,72 @@ function activateCards() {
 
 			// Check if the open card is clicked twice
 			if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
-				openCards.push(card);
-				card.classList.add('open', 'show');
 
-				// Show only two cards max
-				if (openCards.length == 2) {
-					setTimeout(function() {
-						for (const openCard of openCards) {
-							openCard.classList.remove('open', 'show');
-						}
-						openCards  = [];
-					}, 1000);
+				if (canFlip) {
+					openCards.push(card);
+					card.classList.add('open', 'show');
 
-					// Count moves
-					moves += 1;
-					moveCounter.innerText = moves;
-
-					// Star rating
-					if (moves == 13) {
-						starRating.children[2].classList.remove('fa-star');
-						starRating.children[2].classList.add('fa-star-o');
-						rating -= 1;
-					}else if (moves == 25) {
-						starRating.children[1].classList.remove('fa-star');
-						starRating.children[1].classList.add('fa-star-o');
-						rating -= 1;
-					}
-
-					// Check if cards are match
-					if (openCards[0].dataset.card == openCards[1].dataset.card) {
-						openCards[0].classList.add('match');
-						openCards[0].classList.add('open');
-						openCards[0].classList.add('show');
-
-						openCards[1].classList.add('match');
-						openCards[1].classList.add('open');
-						openCards[1].classList.add('show');
-
-						match += 1;
-
-						// Check if the game is won
-						if (match == 8) {
-							stopClock();
-							let stat;
-
-							stat = `In ${time} with ${moves} moves`;
-
-							if(rating == 3) {
-								stat = `${stat} and ${rating} stars!`;
-							} else if (rating == 2) {
-								stat = `${stat} and ${rating} stars!`;
-							} else {
-								stat = `${stat} and ${rating} star!`;
+					// Show only two cards max
+					if (openCards.length == 2) {
+						setTimeout(function() {
+							for (const openCard of openCards) {
+								openCard.classList.remove('open', 'show');
 							}
+							openCards  = [];
+							canFlip = true;
+						}, 500);
 
-							stats.innerText = stat;
-							modal.style.display = "block";
+						canFlip = false;
+
+						// Count moves
+						moves += 1;
+						moveCounter.innerText = moves;
+
+						// Star rating
+						if (moves == 13) {
+							starRating.children[2].classList.remove('fa-star');
+							starRating.children[2].classList.add('fa-star-o');
+							rating -= 1;
+						}else if (moves == 25) {
+							starRating.children[1].classList.remove('fa-star');
+							starRating.children[1].classList.add('fa-star-o');
+							rating -= 1;
+						}
+
+						// Check if cards are match
+						if (openCards[0].dataset.card == openCards[1].dataset.card) {
+							openCards[0].classList.add('match');
+							openCards[0].classList.add('open');
+							openCards[0].classList.add('show');
+
+							openCards[1].classList.add('match');
+							openCards[1].classList.add('open');
+							openCards[1].classList.add('show');
+
+							match += 1;
+
+							// Check if the game is won
+							if (match == 8) {
+								stopClock();
+								let stat;
+
+								stat = `In ${time} with ${moves} moves`;
+
+								if(rating == 3) {
+									stat = `${stat} and ${rating} stars!`;
+								} else if (rating == 2) {
+									stat = `${stat} and ${rating} stars!`;
+								} else {
+									stat = `${stat} and ${rating} star!`;
+								}
+
+								stats.innerText = stat;
+								modal.style.display = "block";
+							}
 						}
 					}
 				}
+				
 			}
 		});
 	}
