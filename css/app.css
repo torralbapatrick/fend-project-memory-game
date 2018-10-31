@@ -1,3 +1,6 @@
+/*
+ * Global styles
+ */
 html {
     box-sizing: border-box;
 }
@@ -21,16 +24,16 @@ body {
     font-family: 'Coda', cursive;
 }
 
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
 }
 
 /*
@@ -82,7 +85,7 @@ h1 {
 }
 
 /*
- * Styles for the Score Panel
+ * Styles for the score panel
  */
 
 .score-panel {
@@ -108,10 +111,13 @@ h1 {
     cursor: pointer;
 }
 
-/* Modal */
+/*
+ * Styles for the modal
+ */
+
 .modal {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
@@ -137,7 +143,7 @@ h1 {
     transform: translate(0, -50%);
 }
 
-.modal button {
+.modal-content button {
     color: #fff;
     cursor: pointer;
     background: #02ccba;

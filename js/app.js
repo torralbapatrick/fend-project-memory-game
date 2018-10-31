@@ -128,17 +128,17 @@ function checkForMatch(card1, card2) {
 		// Check if the game is won
 		if (match == 8) {
 			stopClock();
-			let stat = `In ${time} with ${moves} moves`;
+			let stats = `In ${time} with ${moves} moves`;
 
 			if(rating == 3) {
-				stat = `${stat} and ${rating} stars!`;
+				stats = `${stats} and ${rating} stars!`;
 			} else if (rating == 2) {
-				stat = `${stat} and ${rating} stars!`;
+				stats = `${stats} and ${rating} stars!`;
 			} else {
-				stat = `${stat} and ${rating} star!`;
+				stats = `${stats} and ${rating} star!`;
 			}
 
-			statsElement.innerText = stat;
+			statsElement.innerText = stats;
 			modalElement.style.display = "block";
 		}
 	}
