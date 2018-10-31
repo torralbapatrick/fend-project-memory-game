@@ -1,20 +1,20 @@
-const deck = document.querySelector('.deck'),
-moveCounter = document.querySelector('.moves'),
-starRating = document.querySelector('.stars'),
-timer = document.querySelector('.timer'),
-restartButton = document.querySelector('.restart'),
-stats = document.querySelector('.stats'),
-modal = document.querySelector('.modal'),
-playAgain = document.querySelector('.play-again');
+const deckElement = document.querySelector('.deck'),
+moveElement = document.querySelector('.moves'),
+ratingElement = document.querySelector('.rating'),
+timerElement = document.querySelector('.timer'),
+restartElement = document.querySelector('.restart'),
+statsElement = document.querySelector('.stats'),
+modalElement = document.querySelector('.modal'),
+playAgainElement = document.querySelector('.play-again');
 
-const cards = ['fa-diamond', 'fa-diamond',
-'fa-paper-plane-o', 'fa-paper-plane-o',
-'fa-anchor', 'fa-anchor',
-'fa-bolt', 'fa-bolt',
-'fa-cube', 'fa-cube',
-'fa-leaf', 'fa-leaf',
+const cards = ['fa-anchor', 'fa-anchor',
 'fa-bicycle', 'fa-bicycle',
-'fa-bomb', 'fa-bomb'];
+'fa-bolt', 'fa-bolt',
+'fa-bomb', 'fa-bomb',
+'fa-cube', 'fa-cube',
+'fa-diamond', 'fa-diamond',
+'fa-leaf', 'fa-leaf',
+'fa-paper-plane-o', 'fa-paper-plane-o'];
 
 let openCards, match, moves, rating, seconds, minutes, hours, clock, time, clockOff, canFlip;
 
@@ -42,13 +42,13 @@ function shuffle(array) {
 
 // Initialize game
 function initGame() {
-	modal.style.display = "none";
+	modalElement.style.display = "none";
 
 	const cardHTML = shuffle(cards).map(function(card) { // Shuffle cards
 		return generateCard(card);
 	});
 
-	deck.innerHTML = cardHTML.join('');
+	deckElement.innerHTML = cardHTML.join('');
 
 	flashCards();
 	displayMovesAndRating();
@@ -59,12 +59,12 @@ function initGame() {
 
 // Show all cards for 1 second
 function flashCards() {
-	const allCards = document.querySelectorAll('.card');
-	for (const card of allCards) {
+	const cardsElement = document.querySelectorAll('.card');
+	for (const card of cardsElement) {
 		card.classList.add('open', 'show');
 	}
 	setTimeout(function() {
-		for (const card of allCards) {
+		for (const card of cardsElement) {
 			card.classList.remove('open', 'show');
 		}
 	}, 1000);
@@ -72,12 +72,12 @@ function flashCards() {
 
 // Add listener to the cards
 function activateCards() {
-	const allCards = document.querySelectorAll('.card');
+	const cardsElement = document.querySelectorAll('.card');
 	canFlip = true;
 	openCards = [];
 	match = 0;
 
-	for (const card of allCards) {
+	for (const card of cardsElement) {
 		card.addEventListener('click', function() {
 			startClock();
 			showCard(card);
@@ -138,8 +138,8 @@ function checkForMatch(card1, card2) {
 				stat = `${stat} and ${rating} star!`;
 			}
 
-			stats.innerText = stat;
-			modal.style.display = "block";
+			statsElement.innerText = stat;
+			modalElement.style.display = "block";
 		}
 	}
 }
@@ -147,27 +147,27 @@ function checkForMatch(card1, card2) {
 // Move counter and star rating
 function displayMovesAndRating() {
 	moves = 0; rating = 3;
-	moveCounter.innerText = moves;
+	moveElement.innerText = moves;
 
-	starRating.children[2].classList.remove('fa-star-o');
-	starRating.children[2].classList.add('fa-star');
+	ratingElement.children[2].classList.remove('fa-star-o');
+	ratingElement.children[2].classList.add('fa-star');
 
-	starRating.children[1].classList.remove('fa-star-o');
-	starRating.children[1].classList.add('fa-star');
+	ratingElement.children[1].classList.remove('fa-star-o');
+	ratingElement.children[1].classList.add('fa-star');
 }
 
 function countMoves() {
 	moves += 1;
-	moveCounter.innerText = moves;
+	moveElement.innerText = moves;
 
 	// Star rating
 	if (moves == 13) {
-		starRating.children[2].classList.remove('fa-star');
-		starRating.children[2].classList.add('fa-star-o');
+		ratingElement.children[2].classList.remove('fa-star');
+		ratingElement.children[2].classList.add('fa-star-o');
 		rating -= 1;
 	}else if (moves == 25) {
-		starRating.children[1].classList.remove('fa-star');
-		starRating.children[1].classList.add('fa-star-o');
+		ratingElement.children[1].classList.remove('fa-star');
+		ratingElement.children[1].classList.add('fa-star-o');
 		rating -= 1;
 	}
 }
@@ -175,7 +175,7 @@ function countMoves() {
 // Timer
 function displayClock() {
 	seconds = 0; minutes = 0; hours = 0;
-	timer.innerText = "00:00:00";
+	timerElement.innerText = "00:00:00";
 }
 
 function startClock() {
@@ -195,7 +195,7 @@ function startClock() {
 			(minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
 			(seconds > 9 ? seconds : "0" + seconds);
 
-			timer.innerText = time;
+			timerElement.innerText = time;
 		}, 1000);
 
 		clockOff = false;
@@ -208,11 +208,11 @@ function stopClock() {
 }
 
 // Restart game
-restartButton.addEventListener('click', function() {
+restartElement.addEventListener('click', function() {
 	initGame();
 });
 
-playAgain.addEventListener('click', function() {
+playAgainElement.addEventListener('click', function() {
 	initGame();
 });
 
