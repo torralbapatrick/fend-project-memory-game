@@ -98,11 +98,11 @@ function showCard(card) {
 				setTimeout(function() {
 					for (const openCard of openCards) {
 						openCard.classList.remove('open', 'show');
+						openCard.classList.remove('not-match');
 					}
 					openCards  = [];
 					canFlip = true;
 				}, 500);
-
 				canFlip = false;
 
 				countMoves();
@@ -141,13 +141,18 @@ function checkForMatch(card1, card2) {
 			statsElement.innerText = stats;
 			modalElement.style.display = "block";
 		}
+	} else {
+		// Change background color if not match
+		for (const openCard of openCards) {
+			openCard.classList.add('not-match');
+		}
 	}
 }
 
 // Move counter and star rating
 function displayMovesAndRating() {
 	moves = 0; rating = 3;
-	moveElement.innerText = `${moves} Moves`;
+	moveElement.innerText = `${moves} Move`;
 
 	ratingElement.children[2].classList.remove('fa-star-o');
 	ratingElement.children[2].classList.add('fa-star');
@@ -158,7 +163,7 @@ function displayMovesAndRating() {
 
 function countMoves() {
 	moves += 1;
-	moveElement.innerText = `${moves} Moves`;
+	moveElement.innerText = `${moves} ${(moves <= 1) ? ' Move' : ' Moves'}`;
 
 	// Star rating
 	if (moves == 13) {
