@@ -47,7 +47,6 @@ function initGame() {
 	const cardHTML = shuffle(cards).map(function(card) { // Shuffle cards
 		return generateCard(card);
 	});
-
 	deckElement.innerHTML = cardHTML.join('');
 
 	flashCards();

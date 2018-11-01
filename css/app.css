@@ -1,13 +1,14 @@
 /*
  * Global styles
  */
+
 html {
     box-sizing: border-box;
 }
 
 *,
-*::before,
-*::after {
+*:before,
+*:after {
     box-sizing: inherit;
 }
 
@@ -159,4 +160,12 @@ h1 {
     margin-top: 25px;
     padding: 10px 20px;
     text-transform: uppercase;
+}
+
+.modal-content button:hover {
+    background: #28afa3;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
 }
