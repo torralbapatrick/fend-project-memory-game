@@ -162,7 +162,7 @@ function displayMovesAndRating() {
 
 function countMoves() {
 	moves += 1;
-	moveElement.innerText = `${moves} ${(moves <= 1) ? ' Move' : ' Moves'}`;
+	moveElement.innerText = `${moves} ${moves <= 1 ? ' Move' : ' Moves'}`;
 
 	// Star rating
 	if (moves == 13) {
@@ -179,7 +179,7 @@ function countMoves() {
 // Timer
 function displayClock() {
 	seconds = 0; minutes = 0; hours = 0;
-	timerElement.innerText = "00:00:00";
+	timerElement.innerText = "00:00";
 }
 
 function startClock() {
@@ -195,9 +195,7 @@ function startClock() {
 				}
 			}
 
-			time = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" +
-			(minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
-			(seconds > 9 ? seconds : "0" + seconds);
+			time = `${hours > 0 ? hours + ':' : ''}${minutes > 9 ? minutes : '0' + minutes}:${seconds > 9 ? seconds : '0' + seconds}`;
 
 			timerElement.innerText = time;
 		}, 1000);
@@ -212,13 +210,9 @@ function stopClock() {
 }
 
 // Restart game
-restartElement.addEventListener('click', function() {
-	initGame();
-});
+restartElement.addEventListener('click', initGame);
 
-playAgainElement.addEventListener('click', function() {
-	initGame();
-});
+playAgainElement.addEventListener('click', initGame);
 
 // Initialize game
 initGame();
