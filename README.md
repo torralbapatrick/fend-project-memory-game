@@ -14,7 +14,7 @@ The starter project had some HTML and CSS styling to display a static version of
 	* [zip file](https://github.com/torralbapatrick/fend-project-memory-game/archive/master.zip)
 	* [git clone](https://github.com/torralbapatrick/fend-project-memory-game)
 2. Open index.html file.
-3. Or you can play the game [here]().
+3. Or you can play the game [here](https://torralbapatrick.github.io/fend-project-memory-game/).
 
 ## Instructions
 
