@@ -142,9 +142,8 @@ function checkForMatch(card1, card2) {
 		}
 	} else {
 		// Change background color if not match
-		for (const openCard of openCards) {
-			openCard.classList.add('not-match');
-		}
+		card1.classList.add('not-match');
+		card2.classList.add('not-match');
 	}
 }
 
