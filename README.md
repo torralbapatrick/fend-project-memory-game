@@ -1,6 +1,6 @@
 # Memory Game Project
 
-The starter project had some HTML and CSS styling to display a static version of the Memory Game project. I needed to convert this project from a static project to an interactive one. This required modifying the HTML and CSS files, but primarily the JavaScript file.
+This project is completed as part of [Udacity](https://www.udacity.com/) Front End Nanodegree Program. The starter project had some HTML and CSS styling to display a static version of the Memory Game project. I needed to convert this project from a static project to an interactive one, based on the project [rubric](https://review.udacity.com/#!/rubrics/591/view). This required modifying the HTML and CSS files, but primarily the JavaScript file. See `js/app.js`.
 
 ## Table of Contents
 
