@@ -1,20 +1,22 @@
 # Memory Game Project
 
-This project is completed as part of [Udacity](https://www.udacity.com/) Front End Nanodegree Program. The starter project had some HTML and CSS styling to display a static version of the Memory Game project. I needed to convert this project from a static project to an interactive one, based on the project [rubric](https://review.udacity.com/#!/rubrics/591/view). This required modifying the HTML and CSS files, but primarily the JavaScript file. See `js/app.js`.
+This project is completed as part of [Udacity](https://www.udacity.com/) Front-End Web Developer Nanodegree Program. The starter project had some HTML and CSS styling to display a static version of the Memory Game project. I needed to convert this project from a static project to an interactive one, based on the project [rubric](https://review.udacity.com/#!/rubrics/591/view). This required modifying the HTML and CSS files, but primarily the JavaScript file. See `js/app.js`.
 
 ## Table of Contents
 
-* [Installation](#installation)
+* [Getting Started](#getting-started)
 * [Instructions](#instructions)
 * [Dependencies](#dependencies)
 
-## Installation
+## Getting Started
 
 1. Download the GithHub zip file or clone the repository.
 	* [zip file](https://github.com/torralbapatrick/fend-project-memory-game/archive/master.zip)
 	* [git clone](https://github.com/torralbapatrick/fend-project-memory-game)
 2. Open index.html file.
-3. Or you can play the game [here](https://torralbapatrick.github.io/fend-project-memory-game/).
+
+
+_Or you can play the game [here](https://torralbapatrick.github.io/fend-project-memory-game/)._
 
 ## Instructions
 
